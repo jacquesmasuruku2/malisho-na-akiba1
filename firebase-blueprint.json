@@ -1,0 +1,152 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile in MALISHO NA AKIBA system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["GESTIONNAIRE", "AGENT", "CAISSIER", "CLIENT"] },
+        "marketZone": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "isOnline": { "type": "boolean" },
+        "lastActiveTimestamp": { "type": "number" },
+        "lastLoginDate": { "type": "string" }
+      },
+      "required": ["id", "fullName", "email", "role"]
+    },
+    "Loan": {
+      "title": "Loan",
+      "description": "Credit cycle or loan application in the microcredit system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientPhone": { "type": "string" },
+        "amountRequested": { "type": "number" },
+        "durationDays": { "type": "number" },
+        "purpose": { "type": "string" },
+        "activityType": { "type": "string" },
+        "marketZone": { "type": "string" },
+        "guarantorName": { "type": "string" },
+        "guarantorPhone": { "type": "string" },
+        "idCardNumber": { "type": "string" },
+        "documentUri": { "type": "string" },
+        "clientPhotoUri": { "type": "string" },
+        "status": { "type": "string" },
+        "submissionDate": { "type": "string" }
+      },
+      "required": ["id", "clientId", "clientName", "status"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Financial payment or cash transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "cycleId": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "agentId": { "type": "string" },
+        "agentName": { "type": "string" },
+        "paymentDate": { "type": "number" },
+        "dateString": { "type": "string" },
+        "dayNumber": { "type": "number" },
+        "collectedAmount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "isOfflineSynced": { "type": "boolean" },
+        "type": { "type": "string" },
+        "category": { "type": "string" },
+        "reference": { "type": "string" },
+        "description": { "type": "string" },
+        "amount": { "type": "number" },
+        "recordedByUserId": { "type": "string" },
+        "recordedByName": { "type": "string" }
+      },
+      "required": ["id"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Audit security log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userRole": { "type": "string" },
+        "action": { "type": "string" },
+        "entityType": { "type": "string" },
+        "entityId": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "userId", "action", "timestamp"]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Borrower client profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "quarter": { "type": "string" },
+        "marketZone": { "type": "string" },
+        "activityType": { "type": "string" },
+        "gender": { "type": "string" },
+        "status": { "type": "string" },
+        "assignedAgentId": { "type": "string" },
+        "isOnline": { "type": "boolean" },
+        "registeredDate": { "type": "number" }
+      },
+      "required": ["id", "fullName", "phone"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Chat and internal messages",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderRole": { "type": "string" },
+        "clientId": { "type": "string" },
+        "content": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "isRead": { "type": "boolean" }
+      },
+      "required": ["id", "senderId", "content", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile collection"
+    },
+    "/loans/{loanId}": {
+      "schema": "Loan",
+      "description": "Loan and credit cycles collection"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Payments and cash movements collection"
+    },
+    "/clients/{clientId}": {
+      "schema": "Client",
+      "description": "Registered microfinance clients"
+    },
+    "/chat_messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Client and agent communication messages"
+    },
+    "/audit_logs/{logId}": {
+      "schema": "AuditLog",
+      "description": "System audit trail collection"
+    }
+  }
+}

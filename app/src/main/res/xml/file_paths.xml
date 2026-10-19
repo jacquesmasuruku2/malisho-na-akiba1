@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="internal_files" path="." />
+    <files-path name="chat_attachments" path="chat_attachments/" />
+    <files-path name="voice_messages" path="voice_messages/" />
+    <files-path name="documents" path="documents/" />
+    <files-path name="loan_documents" path="loan_documents/" />
+    <files-path name="reports" path="reports/" />
+    <cache-path name="reports_cache" path="reports/" />
+    <cache-path name="cache_files" path="." />
+    <external-files-path name="external_files" path="." />
+    <external-cache-path name="external_cache" path="." />
+</paths>
